@@ -1,0 +1,40 @@
+a function that returns the sum of two numbers
+
+START
+
+GET num1
+GET num2
+add num1 and num2 and SET to sum variable
+PRINT sum
+END
+--------------------------------------------------------
+
+a function that takes an array of strings, and returns a string that is all those strings concatenated together
+
+START
+
+GET array from user and SET to array
+SET total string = empty string
+iterate through the array and take each value and add each value to the empty string
+PRINT total string
+
+END
+----------------------------------------------------------
+
+a function that takes an array of integers, and returns a new array with every other element
+
+START
+
+GET array from user and SET to num array
+SET new array = empty array
+SET counter = 1
+iterate through num array
+counter = counter + 1
+WHILE counter = odd
+  new array is pushed by the index in num array 
+  ELSE
+  go to next iteration
+
+PRINT new array
+
+END

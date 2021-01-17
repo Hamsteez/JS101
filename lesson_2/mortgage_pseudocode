@@ -1,0 +1,29 @@
+given:
+the loan amount
+the Annual Percentage Rate (APR)
+the loan duration
+
+need: 
+monthly interest rate: interest /12
+loan duration in months: convert total years + months to months
+
+formula: let m = p * (j / (1 - Math.pow((1 + j), (-n))));
+
+m = monthly payment
+p = loan amount --given 
+j = monthly interest rate
+n = loan duration in months
+
+monthly interest: Take loan amount, divide by 12 and multiply by interest rate.
+
+START 
+
+GET loan amount, apr, loan duration and SET to const variables
+find monthly interest rate by taking apr and dividing by 12
+take loan duration and count total number of months (i.e: 1 year and 2 months = 14 months)
+
+plug all values into formula and solve for monthly payment
+
+print monthly payment as $123.45 or $371.00
+
+END
