@@ -6,7 +6,6 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-
 function displayWinner(choice, computerChoice) {
   let myChoice = SHORTHAND_CHOICES.indexOf(choice);
   let compChoice = SHORTHAND_CHOICES.indexOf(computerChoice);
@@ -50,7 +49,6 @@ function scoreKeeper(roundWinner) {
 
 }
 
-
 function youWin(choice, computerChoice) {
   return (choice === 'sc' && computerChoice === 'p') ||
       (choice === 'p' && computerChoice === 'r') ||
@@ -64,7 +62,6 @@ function youWin(choice, computerChoice) {
       (choice === 'r' && computerChoice === 'sc');
 }
 
-
 function youLose(choice, computerChoice) {
   return (computerChoice === 'sc' && choice === 'p') ||
       (computerChoice === 'p' && choice === 'r') ||
@@ -77,7 +74,6 @@ function youLose(choice, computerChoice) {
       (computerChoice === 'sp' && choice === 'r') ||
       (computerChoice === 'r' && choice === 'sc');
 }
-
 
 while (true) {
   while (matchOngoing) {
