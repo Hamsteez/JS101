@@ -119,6 +119,16 @@ function computerChooses() {
   return compChoice;
 }
 
+function playAgain() {
+  prompt('Do you want to play again (y/n)?');
+  let answers = readline.question().toLowerCase();
+  while (!CONTINUE_CHOICES.includes(answers)) {
+    prompt('Please enter "y" or "n".');
+    answers = readline.question().toLowerCase();
+  }
+  return answers;
+}
+
 while (true) {
   while (matchIsOngoing()) {
     let choice = userChooses();
@@ -131,12 +141,7 @@ while (true) {
     isGameOver();
     updateScore();
   }
-  prompt('Do you want to play again (y/n)?');
-  let answer = readline.question().toLowerCase();
-  while (!CONTINUE_CHOICES.includes(answer)) {
-    prompt('Please enter "y" or "n".');
-    answer = readline.question().toLowerCase();
-  }
+  let answer = playAgain();
 
   if (answer === 'y' || answer === 'yes') {
     matchOngoing = true;
