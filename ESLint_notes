@@ -5,6 +5,8 @@ npx eslint test.js
 
 create file: .eslintrc.yml
 in file place following code:
+
+
 # Last update: 05 Oct 2020
 root: true
 parser: babel-eslint

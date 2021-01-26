@@ -1,0 +1,12 @@
+input: string
+output: array (string values)
+rules: 
+  Explicit requirements:
+    - consider palindromes to be case sensitive
+    - returns all palindromes
+
+  Implicit requirements:
+    - possible no spaces?
+    - return whole palindrome and palindrome inside palindrome (abaaba and baab and aa)
+    - no palindrome then return empty array
+    - empty input string outputs empty array as if there is no palindrome
