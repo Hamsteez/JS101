@@ -5,6 +5,11 @@ const COMPUTER_MARKER = 'O';
 const GAMES_TO_WIN = 5;
 const VALID_RESPONSES_TO_CONTINUE = ['yes', 'no', 'y', 'n'];
 const VALID_RESPONSES_TO_CHOOSE_PLAYER = ['p', 'c'];
+const WINNING_LINES = [
+  [1, 2, 3], [4, 5, 6], [7, 8, 9],
+  [1, 4, 7], [2, 5, 8], [3, 6, 9],
+  [1, 5, 9], [3, 5, 7]
+];
 
 let readline = require("readline-sync");
 
@@ -74,21 +79,21 @@ function playerChoosesSquare(board) {
 }
 
 function computerChoosesSquare(board) {
-  let printer = true;
+  let checkForNextMove = true;
 
-  if (printer) {
-    printer = computerOffense(board);
+  if (checkForNextMove) {
+    checkForNextMove = computerOffense(board);
   }
 
-  if (printer) {
-    printer = computerDefense(board);
+  if (checkForNextMove) {
+    checkForNextMove = computerDefense(board);
   }
 
-  if (printer) {
-    printer = computerChoosesFive(board);
+  if (checkForNextMove) {
+    checkForNextMove = computerChoosesFive(board);
   }
 
-  if (printer) {
+  if (checkForNextMove) {
     computerChoosesRandom(board);
   }
 }
@@ -109,14 +114,8 @@ function computerChoosesFive(board) {
 }
 
 function computerDefense(board) {
-  let aboutToWinLines = [
-    [1, 2, 3], [4, 5, 6], [7, 8, 9],
-    [1, 4, 7], [2, 5, 8], [3, 6, 9],
-    [1, 5, 9], [3, 5, 7], [1, 3, 2]
-  ];
-
-  for (let line = 0; line < aboutToWinLines.length; line++) {
-    let [sq1, sq2, sq3] = aboutToWinLines[line];
+  for (let line = 0; line < WINNING_LINES.length; line++) {
+    let [sq1, sq2, sq3] = WINNING_LINES[line];
 
     if (
       board[sq1] === HUMAN_MARKER &&
@@ -145,14 +144,8 @@ function computerDefense(board) {
 }
 
 function computerOffense(board) {
-  let aboutToWinLines = [
-    [1, 2, 3], [4, 5, 6], [7, 8, 9],
-    [1, 4, 7], [2, 5, 8], [3, 6, 9],
-    [1, 5, 9], [3, 5, 7], [1, 3, 2]
-  ];
-
-  for (let line = 0; line < aboutToWinLines.length; line++) {
-    let [sq1, sq2, sq3] = aboutToWinLines[line];
+  for (let line = 0; line < WINNING_LINES.length; line++) {
+    let [sq1, sq2, sq3] = WINNING_LINES[line];
 
     if (
       board[sq1] === COMPUTER_MARKER &&
@@ -185,18 +178,12 @@ function boardFull(board) {
 }
 
 function someoneWon(board) {
-  return !!detectWinner(board);
+  return !!detectRoundWinner(board);
 }
 
-function detectWinner(board) {
-  let winningLines = [
-    [1, 2, 3], [4, 5, 6], [7, 8, 9],
-    [1, 4, 7], [2, 5, 8], [3, 6, 9],
-    [1, 5, 9], [3, 5, 7]
-  ];
-
-  for (let line = 0; line < winningLines.length; line++) {
-    let [sq1, sq2, sq3] = winningLines[line];
+function detectRoundWinner(board) {
+  for (let line = 0; line < WINNING_LINES.length; line++) {
+    let [sq1, sq2, sq3] = WINNING_LINES[line];
 
     if (
       board[sq1] === HUMAN_MARKER &&
@@ -215,12 +202,8 @@ function detectWinner(board) {
   return null;
 }
 
-function checkForWinner(playerScore, computerScore) {
-  if (playerScore === GAMES_TO_WIN || computerScore === GAMES_TO_WIN) {
-    return true;
-  } else {
-    return false;
-  }
+function checkForMatchWinner(playerScore, computerScore) {
+  return playerScore === GAMES_TO_WIN || computerScore === GAMES_TO_WIN;
 }
 
 function selectWhoGoesFirst() {
@@ -232,27 +215,6 @@ function selectWhoGoesFirst() {
   }
   return answer;
 }
-
-// function determineWhoGoesFirst(board, char) {
-//   if (char === 'p') {
-//     displayBoard(board);
-
-//     playerChoosesSquare(board);
-//     if (someoneWon(board) || boardFull(board)) return false;
-
-//     computerChoosesSquare(board);
-//     if (someoneWon(board) || boardFull(board)) return false;
-//   } else {
-//     computerChoosesSquare(board);
-//     if (someoneWon(board) || boardFull(board)) return false;
-
-//     displayBoard(board);
-
-//     playerChoosesSquare(board);
-//     if (someoneWon(board) || boardFull(board)) return false;
-//   }
-//   return true;
-// }
 
 function determineWhoGoesFirst(board, goesFirst) {
   chooseSquare(board, goesFirst);
@@ -282,7 +244,7 @@ function alternatePlayer(currentPlayer) {
 while (true) {
   let playerScore = 0;
   let computerScore = 0;
-  prompt(`Win 5 rounds to win a match!`);
+  prompt(`Win ${GAMES_TO_WIN} rounds to win a match!`);
 
   while (true) {
     let board = initializeBoard();
@@ -297,14 +259,14 @@ while (true) {
     displayBoard(board);
 
     if (someoneWon(board)) {
-      prompt(`${detectWinner(board)} won that round!`);
-      if (detectWinner(board) === 'Player') {
+      prompt(`${detectRoundWinner(board)} won that round!`);
+      if (detectRoundWinner(board) === 'Player') {
         playerScore++;
       } else {
         computerScore++;
       }
-      if (checkForWinner(playerScore, computerScore)) {
-        prompt(`${detectWinner(board)} wins the match!`);
+      if (checkForMatchWinner(playerScore, computerScore)) {
+        prompt(`${detectRoundWinner(board)} wins the match!`);
         prompt(`The final score was player: ${playerScore}, computer: ${computerScore}`);
         break;
       } else {
