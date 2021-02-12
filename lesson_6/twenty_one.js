@@ -85,7 +85,7 @@ function playerTurn(playerCards) {
       answer = readline.question().toLowerCase();
     }
 
-    if (answer === 's' || busted(playerCards)) {
+    if (answer === 's' || answer === 'stay' || busted(playerCards)) {
       break;
     } else {
       playerCards = dealAnotherCard(playerCards);
@@ -97,7 +97,6 @@ function playerTurn(playerCards) {
   }
   if (busted(playerCards)) {
     prompt(`You busted!`);
-    let dealerCards = giveSomeoneFirst2Cards();
     displayResults(dealerCards, playerCards, 'Dealer', 'Player');
     return 'Dealer';
   } else {
