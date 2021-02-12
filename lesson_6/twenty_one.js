@@ -309,8 +309,8 @@ function finalWinnerDisplay(playerScore, dealerScore) {
   }
 }
 
-let cont = true;
-while (cont) {
+let continuer = true;
+while (continuer) {
   console.clear();
   let playerScore = 0;
   let dealerScore = 0;
@@ -337,6 +337,6 @@ while (cont) {
     if (!keepGameGoing) break;
   }
   finalWinnerDisplay(playerScore, dealerScore);
-  cont = playAgain();
+  continuer = playAgain();
 }
 prompt(`Thank you for playing ${GAME_OF_VALUE}, have a good day!`);
