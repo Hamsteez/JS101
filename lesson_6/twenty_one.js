@@ -12,7 +12,7 @@ const VALUE_LETTERS = ['J', 'Q', 'K', 'A'];
 const DECK = [];
 const CONTINUE_VALUES = ['y', 'n', 'yes', 'no'];
 const HIT_STAY_VALUES = ['h', 's', 'hit', 'stay'];
-const GAME_OF_VALUE = 31;
+const GAME_OF_VALUE = 21;
 const COMPUTER_CARD_BOUNDARY = GAME_OF_VALUE - 4;
 const ACE_CALC_HELPER = GAME_OF_VALUE - 11;
 
