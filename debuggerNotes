@@ -1,0 +1,13 @@
+to run debugger on code: 
+node inspect debug.js
+n - go to next line of code
+c - run thru the end of code or till debugger finds an error
+exec counter - gives value of counter
+run - restarts debugger
+sb() - if used without argument, sets breakpoint on current line. if a line number is passed, breakpoint is set on that 
+       specified line.
+cb() - takes two arguments, the name of the file and the line number. ex: cb('break.js', 7)
+list() - shows 5 lines above and 5 lines below current line. Can also take arguments to specify how many lines to show.
+s - steps into a function
+o - step out of a function
+help - lists all commands available
