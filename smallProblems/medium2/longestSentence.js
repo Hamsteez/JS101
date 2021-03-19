@@ -12,9 +12,6 @@ function longestSentence(str) {
     console.log(obj[maxNum] + str[str.indexOf(obj[maxNum]) + obj[maxNum].length]);
   }
   console.log(`The longest sentence has ${maxNum} words.`);
-  // let searchTerm = 'Is that the question';
-  // let x = str.indexOf(searchTerm);
-  // console.log(str[x + searchTerm.length]);
 }
 
 let longText =
