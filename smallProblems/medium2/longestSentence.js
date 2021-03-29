@@ -1,18 +1,52 @@
 /* eslint-disable max-len */
+// function longestSentence(str) {
+//   let arrOfSent = str.split('. ').join('/`/').split('! ').join('/`/').split('? ').join('/`/').split('/`/');
+//   let obj = {};
+//   arrOfSent.forEach(sent => {
+//     obj[sent.split(' ').length] = sent;
+//   });
+//   let maxNum = Math.max(...Object.keys(obj));
+//   if (str[str.indexOf(obj[maxNum]) + obj[maxNum].length] === undefined) {
+//     console.log(obj[maxNum]);
+//   } else {
+//     console.log(obj[maxNum] + str[str.indexOf(obj[maxNum]) + obj[maxNum].length]);
+//   }
+//   console.log(`The longest sentence has ${maxNum} words.`);
+// }
+
 function longestSentence(str) {
-  let arrOfSent = str.split('. ').join('/`/').split('! ').join('/`/').split('? ').join('/`/').split('/`/');
-  let obj = {};
+  let arrOfSent = str.match(/\w.*?[.!?]/g);
+
+  let obj = {sent: '', length: 0};
+
   arrOfSent.forEach(sent => {
-    obj[sent.split(' ').length] = sent;
+    let sentLength = sent.split(/\s/).length;
+    if (sentLength > obj.length) {
+      obj.length = sentLength;
+      obj.sent = sent;
+    }
   });
-  let maxNum = Math.max(...Object.keys(obj));
-  if (str[str.indexOf(obj[maxNum]) + obj[maxNum].length] === undefined) {
-    console.log(obj[maxNum]);
-  } else {
-    console.log(obj[maxNum] + str[str.indexOf(obj[maxNum]) + obj[maxNum].length]);
-  }
-  console.log(`The longest sentence has ${maxNum} words.`);
+  console.log(obj.sent);
+  console.log(`The longest sentence has ${obj.length} words.\n`);
+
 }
+
+// function longestSentence(str) {
+//   let arrOfSent = str.match(/\w.*?\n/g);
+
+//   let obj = {para: '', length: 0};
+
+//   arrOfSent.forEach(sent => {
+//     let sentLength = sent.split(/\s/).length;
+//     if (sentLength > obj.length) {
+//       obj.length = sentLength;
+//       obj.sent = sent;
+//     }
+//   });
+//   console.log(obj.sent);
+//   console.log(`The longest paragraph has ${obj.length} words.\n`);
+
+// }
 
 let longText =
   'Four score and seven years ago our fathers brought forth on this ' +
